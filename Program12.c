@@ -2,9 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-
 #define N 100
-
 struct process
 {
 	int process_id;
@@ -14,22 +12,18 @@ struct process
 	int turn_around_time;
 	int remaining_time;
 };
-
 int queue[N];
 int front = 0, rear = 0;
 struct process proc[N];
-
 void push(int process_id)
 {
 	queue[rear] = process_id;
 	rear = (rear+1)%N;
 }
-
 int pop()
 {
 	if(front == rear)
 		return -1;
-
 	int return_position = queue[front];
 	front = (front +1)%N;
 	return return_position;
@@ -41,19 +35,17 @@ int main()
 	int n,time_quantum;
 	printf("Enter the number of processes: ");
 	scanf("%d", &n);
-
 	for(int i=0; i<n; i++)
 	{
-		printf("Enter the arrival time for the process%d: ",i+1);
+		printf("Enter the Arrival Time for the Process%d : ",i+1);
 		scanf("%d", &proc[i].arrival_time);
-		printf("Enter the burst time for the process%d: ",i+1);
+		printf("Enter the Burst Time for the Process%d : ",i+1);
 		scanf("%d", &proc[i].burst_time);
 		proc[i].process_id = i+1;
 		proc[i].remaining_time = proc[i].burst_time;
 	}
 	printf("Enter time quantum: ");
 	scanf("%d",&time_quantum);
-
 	int time=0; 
 	int processes_left=n;   
 	int position=-1; 		
@@ -107,7 +99,6 @@ int main()
 			if(proc[j].arrival_time == time)	
 				push(j);
 	}
-
 	printf("\n");
 
 	printf("Process\t\tArrival Time\tBurst Time\tWaiting time\tTurn around time\n");
@@ -123,7 +114,6 @@ int main()
 	tat = tat/(1.0*n);
 	wait_time_total = wait_time_total/(1.0*n);
 
-	printf("\nAverage waiting time     : %f",wait_time_total);
-	printf("\nAverage turn around time : %f\n", tat);
-	
+	printf("\nAverage Waiting Time     : %f",wait_time_total);
+	printf("\nAverage Turn Around Time : %f\n", tat);
 }
